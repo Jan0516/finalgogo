@@ -1,0 +1,146 @@
+body{
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0; /* 確保整個頁面沒有多餘的內邊距 */
+    overflow-x: hidden; /* 防止水平滾動條（如果有過大元素時） */
+}
+
+#overview {
+    margin: 0; /* 移除區塊外部的間距 */
+    padding: 0; /* 移除區塊內部的間距 */
+    margin-top: 0;
+    padding-top: 0;
+    background-color: #000000; /* 設定深黑色背景 */
+}
+
+.header {
+    margin: 0;
+    padding: 0;
+}
+
+header h1 {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+
+footer a {
+    text-decoration: none;
+}
+
+/*------橫幅箭頭------*/
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 30%;
+    width: 40px;
+    height: 40px;
+}
+
+.carousel-inner {
+    height: 500px; /* 設定輪播容器的固定高度 */
+}
+
+.carousel-inner img {
+    width: 70%; /* 根據需求自訂圖片寬度 */
+    max-width: 100%; /* 限制圖片最大寬度，確保響應式 */
+    
+    height: auto; /* 保持圖片比例 */
+    object-fit: cover; /* 圖片填滿容器，可能裁切部分內容 */
+    object-position: bottom; /* 優先顯示圖片下半部 */
+}
+
+/* 背景影片樣式 */
+#video-header {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* 設定影片高度 */
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+#background-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+    
+    z-index: -1;
+    
+    
+}
+
+/*-------頁首-------*/
+/* 頁首覆蓋樣式 */
+.header {
+    width: 100%;
+    height: 100px; /* 調整高度 */
+    background: transparent; /* 背景透明或背景影片 */
+    position: relative;
+    z-index: 2;
+    padding: 0 20px; /* 添加左右內距 */
+  }
+  
+  
+  /* 選單樣式 */
+  .nav-menu {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-menu .nav {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+  
+  .nav-menu .nav-item {
+    margin-left: 15px; /* 添加選單項目之間的間距 */
+  }
+  
+  .nav-menu .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  
+  .nav-menu .nav-link:hover {
+    text-decoration: underline;
+  }
+  
+  /* Logo樣式 */
+  .logo {
+    display: flex;
+    flex-direction: column; /* 圖片和文字垂直排列 */
+    align-items: center; /* 垂直置中 */
+    text-align: center; /* 文字水平置中 */
+  }
+  
+  .logo-img {
+    width: 120px; /* 根據需求調整Logo大小 */
+    height: auto;
+    margin-bottom: 5px; /* 增加圖片與文字之間的間距 */
+  }
+  
+  .logo-text {
+    color: white;
+    font-size: 20px;
+    margin-top: 5px;
+  }
+  
+  /* 設置選單與Logo位置 */
+  .container-fluid {
+    display: flex;
+    justify-content: space-between; /* 左右兩邊對齊 */
+    align-items: center; /* 垂直置中 */
+  }
+
+  
+  
+  
