@@ -1,57 +1,65 @@
-//install: node js
-//install web server package: express >npm install express
-var express = require("express");
-var server = express();
-var bodyParser = require("body-parser");
+// 載入必要的模組
+const express = require("express");
+const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
+const DB = require("nedb-promises");
 
-//web root
-server.use(express.static(__dirname+"/AgencyProject"));
+// 初始化 Express 應用
+const server = express();
+
+// 1. 配置靜態文件目錄
+server.use(express.static(__dirname+"/AgencyProject")); // 靜態文件夾名稱可以改成你的前端文件夾名稱
+
+// 2. 使用 body-parser 處理請求數據
 server.use(bodyParser.json());
-server.use(bodyParser.urlencoded());
+server.use(bodyParser.urlencoded({ extended: true }));
+server.use(fileUpload());
 
-var fileUpload = require("express-fileupload");
-server.use(fileUpload({defCharset:'utf8', defParamCharset:'utf8'}));
-
-
-var DB = require("nedb-promises");
-var ProfolioDB = DB.create(__dirname+"/profolio.db");
-var ContactDB = DB.create(__dirname+"/contact.db");
- 
-
- ProfolioDB.insert([
-     { modal: "#portfolioModal1", imgSrc: "modalroundicons.png", heading: "Round Icons", text: "Graphic Design" },
-     { modal: "#portfolioModal2", imgSrc: "startup-framework.png", heading: "Startup Framework", text: "Website Design" },
-     { modal: "#portfolioModal3", imgSrc: "treehouse.png", heading: "Treehouse", text: "Website Design" },
-     { modal: "#portfolioModal1", imgSrc: "roundicons.png", heading: "Round Icons", text: "Graphic Design" },
-     { modal: "#portfolioModal2", imgSrc: "startup-framework.png", heading: "Startup Framework", text: "Website Design" },
-     { modal: "#portfolioModal3", imgSrc: "treehouse.png", heading: "Treehouse", text: "Website Design" }
- ])
-
-server.get("/services", (req, res)=>{
-    //DB find
-    var Services=[
-        {icon: "fa-shopping-cart", heading:"E-Commerce", text:"Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."},
-        {icon: "fa-laptop", heading:"Responsive Design", text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Minima maxime quam architecto quo inventore harum ex magni, dicta impedit."}
-    ];
-    res.send(Services);
+// 3. 初始化資料庫
+const ContactDB = DB.create({
+    filename: __dirname + "/contact.db", // 資料庫文件的路徑
+    autoload: true,                     // 自動創建並加載資料庫
 });
 
-server.get("/profolio", (req,res)=>{
-      //DB
-      ProfolioDB.find({}).then(results=>{
-        if(results != null){
-             res.send(results);
-        }else{
-            res.send("Error!");
+// 定義 /contact_me 路由
+server.post("/contact_me", async (req, res) => {
+    try {
+        // 從表單中提取字段
+        const { name, email, phone, message } = req.body;
+
+        // 處理文件上傳
+        let uploadedFileName = null;
+        if (req.files && req.files.myFile1) {
+            const file = req.files.myFile1;
+            uploadedFileName = `uploads/${Date.now()}_${file.name}`; // 確保文件名唯一
+            const uploadPath = __dirname + "/" + uploadedFileName;
+
+            // 保存文件到伺服器
+            await file.mv(uploadPath);
         }
-      })
-})
 
-server.post("/contact_me", (req,res)=>{
-     ContactDB.insert(req.body);
-     res.redirect("/#contact");
-})
+        // 保存數據到資料庫
+        const newEntry = {
+            name,
+            email,
+            phone,
+            message,
+            file: uploadedFileName, // 文件路徑（如果有上傳文件）
+            timestamp: new Date(),
+        };
 
-server.listen(80, ()=>{
-    console.log("Server is running at port 80.");
-})
+        await ContactDB.insert(newEntry);
+
+        // 返回成功回應
+        res.status(200).send("Message and file uploaded successfully");
+    } catch (err) {
+        console.error("Error processing contact form:", err);
+        res.status(500).send("Failed to process contact form");
+    }
+});
+
+// 啟動伺服器
+const PORT = 3000;
+server.listen(PORT, () => {
+    console.log(`Server is running on http://localhost:${PORT}`);
+});

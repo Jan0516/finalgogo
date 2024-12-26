@@ -141,6 +141,95 @@ footer a {
     align-items: center; /* 垂直置中 */
   }
 
+
+  /* Section Background(Contact) */
+#contact {
+  background-color: #333; /* 深色背景 */
+  color: #fff; /* 白色文字 */
+  padding: 50px 0;
+}
+
+/* 表單標題樣式 */
+#contact .section-heading {
+  font-size: 36px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+#contact .section-subheading {
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 50px;
+  color: #d3d3d3;
+}
+
+/* 表單輸入框樣式 */
+#contact .form-control {
+  background-color: #444;
+  border: none;
+  color: #fff;
+  padding: 15px;
+  border-radius: 0;
+}
+
+#contact .form-control:focus {
+  background-color: #555;
+  color: #fff;
+  border-color: #ff6600;
+  box-shadow: none;
+}
+
+/* 橘色按鈕樣式 */
+.btn-orange {
+  background-color: #ff6600;
+  color: #fff;
+  border: none;
+  padding: 15px 30px;
+  text-transform: uppercase;
+  font-weight: 700;
+  transition: background-color 0.3s ease;
+  border-radius: 0;
+}
+
+.btn-orange:hover {
+  background-color: #e65500;
+  color: #fff;
+}
+
+/* 表單居中對齊 */
+#contact .form-group {
+  margin-bottom: 20px;
+}
+
+
+/*角色*/
+/* 背景和文字樣式 */
+#characters {
+  background-color: #000; /* 黑色背景 */
+  color: #fff; /* 白色文字 */
+}
+
+/* 卡片樣式 */
+#characters .card {
+  background-color: transparent; /* 透明背景 */
+  border: none; /* 移除邊框 */
+}
+
+#characters .card-img-top {
+  border-radius: 10px; /* 圓角圖片 */
+}
+
+#characters .card-title {
+  font-size: 1.2rem;
+  margin-top: 15px;
+}
+
+#characters .card-text {
+  font-size: 0.9rem;
+  color: #d3d3d3; /* 灰色文字 */
+}
+
   
   
   
