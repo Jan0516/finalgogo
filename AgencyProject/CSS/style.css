@@ -68,7 +68,7 @@ footer a {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    
+    object-position: center top; /* 將影片對齊到容器的頂部 */
     
     z-index: -1;
     
@@ -229,6 +229,82 @@ footer a {
   font-size: 0.9rem;
   color: #d3d3d3; /* 灰色文字 */
 }
+
+
+/*-----------section-------------*/
+.section {
+  position: relative;
+  height: 100vh; /* 每個區塊的高度為視窗高度 */
+}
+
+.parallax-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -1; /* 確保背景位於內容之下 */
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+
+/*-----------man---------*/
+
+
+
+/* 圖片容器 */
+.image-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 中間圖片 */
+#man {
+  position: relative;
+  z-index: 2; /* 中間圖片置於最上層 */
+  width: 300px; /* 初始寬度 */
+  height: auto;
+  transform: scale(1); /* 初始大小 */
+  transition: transform 0.3s ease-out;
+}
+
+/* 左右圖片 */
+.side-img {
+  position: absolute;
+  top: 50%; /* 垂直居中 */
+  transform: translateY(-50%);
+  width: 200px; /* 初始寬度 */
+  height: auto;
+  z-index: 1; /* 確保中間圖片在最上層 */
+  transition: transform 0.3s ease-out;
+}
+
+/* 左邊圖片 */
+#left-img {
+  left: 20%; /* 初始位置 */
+}
+
+/* 右邊圖片 */
+#right-img {
+  right: 20%; /* 初始位置 */
+}
+
+
+
+
 
   
   
